@@ -12,10 +12,50 @@ namespace ContosoRecipes.Controllers
     public class RecipesController : ControllerBase
     {
         [HttpGet]
-        public string[] GetDishes()
+        public ActionResult GetRecipes()
         {
-            string[] dishes = { "Garlic", "Onion", "Ginger" };
-            return dishes;
+            string[] recipes = { "Garlic", "Onion", "Ginger" };
+
+            if (recipes.Any())
+                return NotFound();
+            return Ok(recipes);
+        }
+
+        [HttpPost]
+        public ActionResult CreateRecipes()
+        {
+            bool itemCreated = true;
+
+            string[] recipes = { "Garlic", "Onion", "Ginger" };
+
+            if (itemCreated)
+                return Ok(recipes);
+
+            return NoContent();
+        }
+
+        [HttpPut]
+        public ActionResult UpdateRecipes()
+        {
+            bool itemUpdated = false;
+
+            string[] recipes = { "Garlic", "Onion", "Bell Pepper" };
+
+            if (itemUpdated)
+                return Ok(recipes);
+
+            return NoContent();
+        }
+
+        [HttpDelete]
+        public ActionResult DeleteRecipes()
+        {
+            bool itemDeleted = false;
+
+            if (itemDeleted)
+                return BadRequest();
+
+            return NoContent();
         }
     }
 }
