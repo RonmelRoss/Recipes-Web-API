@@ -47,13 +47,13 @@ namespace ContosoRecipes.Controllers
             return NoContent();
         }
 
-        [HttpDelete]
-        public ActionResult DeleteRecipes()
+        [HttpDelete("{id}")]    // Route: /api/recipes/{id}
+        public ActionResult DeleteRecipes(string id)
         {
-            bool itemDeleted = false;
+            string flag = "1";
 
-            if (itemDeleted)
-                return BadRequest();
+            if (flag == id)
+                return Ok("Value is deleted");
 
             return NoContent();
         }
