@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ContosoRecipes.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -14,24 +15,28 @@ namespace ContosoRecipes.Controllers
         [HttpGet]
         public ActionResult GetRecipes([FromQuery]int count)
         {
-            string[] recipes = { "Garlic", "Onion", "Ginger" };
+            // string[] recipes = { "Garlic", "Onion", "Ginger" };
+            Recipe[] recipes =
+            {
+                new() { Title = "Garlic" },
+                new() { Title = "Onion" },
+                new() { Title = "Ginger" }
+            };
 
-            if (!recipes.Any())
-                return NotFound();
+            //if (!recipes.Any())
+            //    return NotFound();
             return Ok(recipes.Take(count));
         }
 
         [HttpPost]
-        public ActionResult CreateRecipes()
+        public ActionResult CreateRecipes([FromBody] Recipe newRecipe) //Using [FromBody] binding attribute
         {
-            bool itemCreated = true;
+            // validate and save to database
+            bool badThingsHappened = false;
+            if (badThingsHappened)
+                return BadRequest();
 
-            string[] recipes = { "Garlic", "Onion", "Ginger" };
-
-            if (itemCreated)
-                return Ok(recipes);
-
-            return NoContent();
+            return Created("", newRecipe);
         }
 
         [HttpPut]
