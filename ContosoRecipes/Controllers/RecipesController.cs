@@ -12,13 +12,13 @@ namespace ContosoRecipes.Controllers
     public class RecipesController : ControllerBase
     {
         [HttpGet]
-        public ActionResult GetRecipes()
+        public ActionResult GetRecipes([FromQuery]int count)
         {
             string[] recipes = { "Garlic", "Onion", "Ginger" };
 
-            if (recipes.Any())
+            if (!recipes.Any())
                 return NotFound();
-            return Ok(recipes);
+            return Ok(recipes.Take(count));
         }
 
         [HttpPost]
